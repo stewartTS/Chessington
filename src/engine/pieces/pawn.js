@@ -19,6 +19,10 @@ export default class Pawn extends Piece {
 
         if (this.player === Player.WHITE) {
 
+            if(location.row == 7) {
+                return moves;
+            }
+
             if (board.getPiece(square1W)) {
                 return moves
             }
@@ -32,6 +36,11 @@ export default class Pawn extends Piece {
                 moves.push(square2W)
             }
         } else {
+
+            if(location.row == 0) {
+                return moves
+            }
+            
             if (board.getPiece(square1B)) {
                 return moves
             }
