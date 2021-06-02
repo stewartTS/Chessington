@@ -8,41 +8,36 @@ export default class Queen extends Piece {
 
     getAvailableMoves(board) {
         const location = board.findPiece(this);
-        const moves = [];
-        for (let i = 0; i < 8; i++) {
-            if (i !== location.col) {
-                moves.push(Square.at(location.row, i));
-            }
-            if (i !== location.row) {
-                moves.push(Square.at(i, location.col));
-            }
+        const allMoves = [];
+        
+        // for (let i = 0; i < 8; i++) {
+        //     if (i !== location.col) {
+        //         allMoves.push(Square.at(location.row, i));
+        //     }
+        //     if (i !== location.row) {
+        //         allMoves.push(Square.at(i, location.col));
+        //     }
+        // }
+
+        for (let i = 1; i < 8; i++) {
+            const locationRowPlus = location.row + i
+            const locationRowMinus = location.row - i
+            const locationColPlus = location.col + i
+            const locationColMinus = location.col - i
+
+            allMoves.push(Square.at(locationRowPlus, locationColPlus));
+            allMoves.push(Square.at(locationRowPlus, locationColMinus));
+            allMoves.push(Square.at(locationRowMinus, locationColMinus));
+            allMoves.push(Square.at(locationRowMinus, locationColPlus));
+            
+            allMoves.push(Square.at(locationRowPlus, location.col));
+            allMoves.push(Square.at(locationRowMinus, location.col));
+            allMoves.push(Square.at(location.row, locationColPlus));
+            allMoves.push(Square.at(location.row, locationColMinus));
+
+
         }
-
-        let locationRowPlus = location.row
-        let locationColPlus = location.col
-        let locationRowMinus = location.row
-        let locationColMinus = location.col
-
-        for (let i = 0; i < 8; i++) {     
-
-            locationRowPlus += 1
-            locationRowMinus -= 1
-            locationColPlus += 1
-            locationColMinus -= 1
-
-            if (locationRowPlus < 8 && locationColPlus < 8) {
-                moves.push(Square.at(locationRowPlus, locationColPlus));  
-            }
-            if (locationRowPlus < 8 && locationColMinus > -1) {
-                moves.push(Square.at(locationRowPlus, locationColMinus));  
-            }
-            if (locationRowMinus > -1 && locationColMinus > -1) {
-                moves.push(Square.at(locationRowMinus, locationColMinus));
-            }
-            if (locationRowMinus > -1 && locationColPlus < 8) {
-                moves.push(Square.at(locationRowMinus, locationColPlus));
-            }
-        }
-        return moves;
+        const legalMoves = allMoves.filter(move => move.row > -1 && move.row < 8 && move.col > -1 && move.col < 8)
+        return legalMoves;
     }
 }

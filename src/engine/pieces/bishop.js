@@ -9,27 +9,20 @@ export default class Bishop extends Piece {
 
     getAvailableMoves(board) {
         const location = board.findPiece(this);
-
-        let moves = [];
-        for (let i = 1; i < 8; i++) {     
+        const moves = [];
+        for (let i = 1; i < 8; i++) {
             const locationRow = location.row + i
             const locationCol = location.col + i
             const locationRow2 = location.row - i
             const locationCol2 = location.col - i
 
-            if (locationRow < 8 && locationCol < 8) {
-                moves.push(Square.at(locationRow, locationCol));  
-            }
-            if (locationRow < 8 && locationCol2 > -1) {
-                moves.push(Square.at(locationRow, locationCol2));  
-            }
-            if (locationRow2 > -1 && locationCol2 > -1) {
-                moves.push(Square.at(locationRow2, locationCol2));
-            }
-            if (locationRow2 > -1 && locationCol < 8) {
-                moves.push(Square.at(locationRow2, locationCol));
-            }
+            moves.push(Square.at(locationRow, locationCol));
+            moves.push(Square.at(locationRow, locationCol2));
+            moves.push(Square.at(locationRow2, locationCol2));
+            moves.push(Square.at(locationRow2, locationCol));
+
         }
-        return moves;
+        const legalMoves = moves.filter(move => move.row > -1 && move.row < 8 && move.col > -1 && move.col < 8)
+        return legalMoves;
     }
 }
