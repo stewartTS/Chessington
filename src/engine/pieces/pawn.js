@@ -24,16 +24,14 @@ export default class Pawn extends Piece {
 
         if (this.player === Player.WHITE) {
 
-            if(location.row == 7) {
+            if (location.row == 7) {
                 return moves;
             }
 
             if (board.getPiece(square1W)) {
                 return moves
             }
-
-            console.log(square1W);
-
+            
             if (this.checkIfOnBoard(wTakeL) && board.getPiece(wTakeL)) {
                 if (board.getPiece(wTakeL).player === Player.BLACK && !(board.getPiece(wTakeL) instanceof King)) {
                     moves.push(wTakeL);
@@ -56,10 +54,10 @@ export default class Pawn extends Piece {
             }
         } else {
 
-            if(location.row == 0) {
+            if (location.row == 0) {
                 return moves
             }
-            
+
             if (board.getPiece(square1B)) {
                 return moves
             }
@@ -72,7 +70,7 @@ export default class Pawn extends Piece {
             }
 
             if (this.checkIfOnBoard(bTakeR) && board.getPiece(bTakeR)) {
-                if (board.getPiece(bTakeR).player === Player.WHITE && !(board.getPiece(bTakeR) instanceof King))  {
+                if (board.getPiece(bTakeR).player === Player.WHITE && !(board.getPiece(bTakeR) instanceof King)) {
                     moves.push(bTakeR);
                 }
             }

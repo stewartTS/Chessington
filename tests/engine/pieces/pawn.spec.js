@@ -187,4 +187,22 @@ describe('Pawn', () => {
         moves.should.not.deep.include(Square.at(4, 3));
     });
 
+    it('can be promoted to another piece not king', () => {
+        const pawn = new Pawn(Player.BLACK);
+        const king = new King(Player.BLACK);
+
+        const start = Square.at(1, 3);
+        const end = Square.at(0, 3);
+        board.setPiece(start, pawn);
+
+        board.movePiece(start, end);
+
+        console.log(board.getPiece(end));
+
+        const endPiece = board.getPiece(end);
+        const endIsKing = endPiece instanceof Pawn;
+
+        endIsKing.should.not.equal(true);
+    })
+
 });
