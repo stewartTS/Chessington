@@ -20,6 +20,4 @@ export default class Piece {
         }
         return true;
     }
-
-
 }
