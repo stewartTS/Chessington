@@ -1,6 +1,7 @@
 import Player from '../player';
 import Square from '../square';
 import Piece from './piece';
+import King from './king';
 
 export default class Rook extends Piece {
     constructor(player) {
@@ -11,36 +12,57 @@ export default class Rook extends Piece {
         const location = board.findPiece(this);
         const moves = [];
 
-        for (let i = 1; location.col + i < 8; i++) {
-            if (board.getPiece(Square.at(location.row, location.col + i))) {
+
+        for (let i = 1; this.checkIfOnBoard(location.row, location.col + i); i++) {
+           const square = Square.at(location.row, location.col + i);
+            if (board.getPiece(square)) {
+                if(this.player == (board.getPiece(square)).player || (board.getPiece(square) instanceof King)) {
+                    break;
+                }
+                moves.push(square);
                 break;
-            }
-            moves.push(Square.at(location.row, location.col + i));
+            } 
+            moves.push(square); 
         }
 
-        for (let i = 1; location.row + i < 8; i++) {
-            if (board.getPiece(Square.at(location.row + i, location.col))) {
+        for (let i = 1; this.checkIfOnBoard(location.row + i, location.col); i++) {
+            const square = Square.at(location.row + i, location.col);
+            if (board.getPiece(square)) {
+                if(this.player == (board.getPiece(square)).player || (board.getPiece(square) instanceof King)) {
+                    break;
+                }
+                moves.push(square);
                 break;
-            }
-            moves.push(Square.at(location.row + i, location.col));
+            } 
+            moves.push(square); 
         }
 
 
-        for (let i = 1; location.col - i > -1; i++) {
-            if (board.getPiece(Square.at(location.row, location.col - i))) {
+        for (let i = 1;this.checkIfOnBoard(location.row, location.col - i); i++) {
+            const square = Square.at(location.row, location.col - i);
+            if (board.getPiece(square)) {
+                if(this.player == (board.getPiece(square)).player || (board.getPiece(square) instanceof King)) {
+                    break;
+                }
+                moves.push(square);
                 break;
-            }
-            moves.push(Square.at(location.row, location.col - i));
+            } 
+            moves.push(square); 
         }
 
-        for (let i = 1; location.row - i > -1; i++) {
-            if (board.getPiece(Square.at(location.row - i, location.col))) {
+        for (let i = 1; this.checkIfOnBoard(location.row - i, location.col); i++) {
+            const square = Square.at(location.row - i, location.col);
+            if (board.getPiece(square)) {
+                if(this.player == (board.getPiece(square)).player || (board.getPiece(square) instanceof King)) {
+                    break;
+                }
+                moves.push(square);
                 break;
-            }
-            moves.push(Square.at(location.row - i, location.col));
+            } 
+            moves.push(square); 
         }
 
-        const legalMoves = moves.filter(move => move.row > -1 && move.row < 8 && move.col > -1 && move.col < 8);
-        return legalMoves;
+        //const legalMoves = moves.filter(move => move.row > -1 && move.row < 8 && move.col > -1 && move.col < 8);
+        return moves;
     }
 }

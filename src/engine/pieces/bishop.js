@@ -7,8 +7,6 @@ export default class Bishop extends Piece {
         super(player);
     }
 
-    
-
     getAvailableMoves(board) {
         
         const location = board.findPiece(this);
@@ -41,7 +39,6 @@ export default class Bishop extends Piece {
             }
             moves.push(Square.at(location.row - i, location.col + i));
         }
-        //const legalMoves = moves.filter(move => move.row > -1 && move.row < 8 && move.col > -1 && move.col < 8)
         return moves;
     }
 }
