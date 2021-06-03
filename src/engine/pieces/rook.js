@@ -13,7 +13,7 @@ export default class Rook extends Piece {
         const directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]; 
         const ourPiece = this
 
-        return board.findMoves(directions, location, ourPiece, board)    
+        return board.findMoves(directions, location, ourPiece, board, 7)    
        
     }
 }

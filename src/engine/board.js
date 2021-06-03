@@ -45,13 +45,16 @@ export default class Board {
         }
     }
 
-    findMoves(directions, location, piece, board) {
+    findMoves(directions, location, piece, board, distance) {
 
         const moves = [];
 
         directions.forEach(direction => {
 
             for (let i = 1; piece.checkIfOnBoard(location.row + direction[0] * i, location.col + direction[1] * i); i++) {
+                if (i > distance) {
+                    break;
+                }
                 const square = Square.at(location.row + direction[0] * i, location.col + direction[1] * i);
                 //console.log(square);
                 if (board.getPiece(square)) {
